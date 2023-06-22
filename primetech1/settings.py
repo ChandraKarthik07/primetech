@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-9i+uv4=hiwa-5tj$l49)34g)ao-7__m*%767l3ozk@_4z%%y8m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -69,7 +69,8 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "primetech1.wsgi.application"
+# WSGI_APPLICATION = "primetech1.wsgi.application"
+ASGI_APPLICATION = "primetech1.asgi.application"
 
 
 # Database
