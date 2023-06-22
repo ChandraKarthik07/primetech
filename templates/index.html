@@ -15,11 +15,13 @@
             text-align: center;
         }
 
-        .dishes ul{
+        .dishes-list{
             display: grid;
-            grid-template-columns: 1fr 2fr;
-
-
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
+        }
+        .high{
+            background: yellow;
         }
     </style>
 </head>
@@ -40,15 +42,21 @@
                 <h1>{{ restaurant_name }}</h1>
                 <p>Location of the restaurant</p>
             </div>
-            <div class="dishes" >
+            <div class="dishes">
                 <ul>
                     {% for dish, items in dishes %}
                         <li>
                             <h4>{{ dish.name }}</h4>
                             <ul>
-                                {% for item in items %}
-                                    <li>{{ item.name }} - {{ item.price }}</li>
-                                {% endfor %}
+                                <div class="dishes-list">
+                                    {% for item in items %}
+                                        {% if query in item.name %}
+                                            <li><div class="high">{{ item.name }}</div> -{{ item.price }}</li>  
+                                     {% else %}
+                                            <li>{{ item.name }} - {{ item.price }}</li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
                             </ul>
                         </li>
                     {% endfor %}
