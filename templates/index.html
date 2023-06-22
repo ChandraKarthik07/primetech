@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Menu</title>
+    <style>
+        .cards {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            border: 1px solid #333;
+            margin: 2rem;
+            border-radius: 10px;
+        }
+
+        .img-loc {
+            text-align: center;
+        }
+
+        .dishes ul{
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+
+
+        }
+    </style>
+</head>
+<body>
+    <h1>Menu</h1>
+    <form action="{% url 'search' %}" method="GET">
+        <input type="text" name="query" placeholder="Search">
+        <input type="submit" value="Search">
+    </form>
+    {% if query %}
+        <p>Showing results for: <strong>{{ query }}</strong></p>
+    {% endif %}
+    
+    <h2>Matched Query Items</h2>
+    {% for restaurant_name, dishes in grouped_dishes.items %}
+        <div class="cards">
+            <div class="img-loc">
+                <h1>{{ restaurant_name }}</h1>
+                <p>Location of the restaurant</p>
+            </div>
+            <div class="dishes" >
+                <ul>
+                    {% for dish, items in dishes %}
+                        <li>
+                            <h4>{{ dish.name }}</h4>
+                            <ul>
+                                {% for item in items %}
+                                    <li>{{ item.name }} - {{ item.price }}</li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% endfor %}
+    
+    {% if not grouped_dishes %}
+        <p>No dishes found.</p>
+    {% endif %}
+</body>
+</html>
